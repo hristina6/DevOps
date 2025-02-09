@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Books Homepage - Welcome to My Book Store</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Book Store</h1>
+</header>
+<main>
+    <form method="get" action="/books/add-form">
+        <input type="submit" value="Add Book"/>
+    </form>
+
+    <h2>Choose book:</h2>
+    <!-- Display radio buttons for each book,
+            the value should be the isbn
+            and the displayed text should be Title: <bookTitle>, Genre:<genre>, Year: <year> -->
+
+    <form method="post" action="/author">
+        <div th:each="book : ${books}">
+            <input type="radio" name="isbn" th:value="${book.isbn}" th:text="|Title: ${book.title}, Genre: ${book.genre}, Year: ${book.year}, BookStore: ${book.bookStore?.name}|">
+            <br>
+
+            <div>
+                <button><a th:href="@{'/books/edit-form/' + ${book.id}}" style="text-decoration: none">Edit</a></button>
+                <button><a th:href="@{'/books/delete/' + ${book.id}}" style="text-decoration: none">Delete</a></button>
+                <button><a th:href="@{'/books/review/' + ${book.id}}" style="text-decoration: none">Review</a></button>
+            </div>
+
+            <br>
+        </div>
+        <input type='submit' value='Submit'>
+    </form>
+
+</main>
+</body>
+</html>

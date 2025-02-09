@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post" th:action="@{'/books/review/' + ${bookId}}">
+    <label>Score:</label>
+    <input type="number" name="score"/>
+    <br/>
+    <label>Description:</label>
+    <input type="text" name="description"/>
+    <br/>
+    <label>Timestamp:</label>
+    <input type="datetime-local" name="timestamp"/>
+    <br/>
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

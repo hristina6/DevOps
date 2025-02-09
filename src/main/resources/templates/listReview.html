@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="get" action="/books/filter/timestamp">
+    <input type="datetime-local" name="from"/>
+    <br/>
+    <input type="datetime-local" name="to"/>
+    <br/>
+    <input type="submit" value="Filter"/>
+</form>
+
+<div th:each="review : ${reviews}">
+    <p th:text="|Book: ${review.book.title}, Score: ${review.score}, Description: ${review.description}, Timestamp: ${review.timestamp}|"></p>
+</div>
+
+</body>
+</html>

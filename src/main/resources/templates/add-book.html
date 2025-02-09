@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:action="${book != null ? '/books/edit/' + book.id : '/books/add'}">
+    <label>ISBN:</label>
+    <input type="text" name="isbn" th:value="${book?.isbn}"/>
+    <br>
+    <label>Title:</label>
+    <input type="text" name="title" th:value="${book?.title}"/>
+    <br>
+
+    <label>Genre:</label>
+    <input type="text" name="genre" th:value="${book?.genre}"/>
+    <br>
+
+    <label>Year:</label>
+    <input type="number" name="year" th:value="${book?.year}"/>
+
+    <br>
+
+    <select name="bookStoreId">
+        <option th:each="bookStore : ${bookStores}" th:text="${bookStore.name}" th:value="${bookStore.id}"
+                th:selected="${bookStore.id} == ${book?.bookStore?.id}"></option>
+    </select>
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
