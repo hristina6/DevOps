@@ -22,8 +22,8 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag my-image-name:kii-app
-        docker tag my-image-name:latest ${{ secrets.DOCKER_USERNAME }}/kii-app:latest
-        docker tag my-image-name:latest ${{ secrets.DOCKER_USERNAME }}/kii-app:${{ github.sha }}
+        docker tag my-image-name:kii-app ${{ secrets.DOCKER_USERNAME }}/kii-app:latest
+        docker tag my-image-name:kii-app ${{ secrets.DOCKER_USERNAME }}/kii-app:${{ github.sha }}
 
     - name: Push the Docker image to DockerHub
       run: |
