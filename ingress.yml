@@ -4,14 +4,15 @@ metadata:
   name: kii-app-ingress
   namespace: kii-namespace
 spec:
+  ingressClassName: nginx
   rules:
     - host: kii-domain.com
       http:
         paths:
-          - path: /
+          - path: /books  
             pathType: Prefix
             backend:
               service:
                 name: kii-app
                 port:
-                  number: 9090
+                  number: 8080
