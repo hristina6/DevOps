@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kii-app-ingress
+  namespace: kii-namespace
+spec:
+  rules:
+    - host: kii-domain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kii-app
+                port:
+                  number: 9090
