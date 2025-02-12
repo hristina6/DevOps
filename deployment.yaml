@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: kii-namespace
+data:
+  application.properties: |
+    spring.datasource.url=jdbc:postgresql://db:5432/book_store
+    spring.datasource.username=postgres
+    spring.jpa.hibernate.ddl-auto=update
+    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secrets
+  namespace: kii-namespace
+type: Opaque
+stringData:
+  POSTGRES_USERNAME: "cG9zdGdyZXM="
+  POSTGRES_PASSWORD: "MjAwMl9tYWo="
+  POSTGRES_URL: "jdbc:postgresql://db:5432/book_store"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kii-db
+  namespace: kii-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kii-db
+  template:
+    metadata:
+      labels:
+        app: kii-db
+    spec:
+      containers:
+        - name: kii-db
+          image: postgres:14
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: "book_store"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: POSTGRES_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: POSTGRES_PASSWORD
