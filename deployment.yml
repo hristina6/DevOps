@@ -17,10 +17,10 @@ metadata:
   name: db-secrets
   namespace: kii-namespace
 type: Opaque
-stringData:
+data:
   POSTGRES_USERNAME: "cG9zdGdyZXM="
   POSTGRES_PASSWORD: "MjAwMl9tYWo="
-  POSTGRES_URL: "jdbc:postgresql://db:5432/book_store"
+  POSTGRES_URL: "amRiYzpwb3N0Z3Jlc3FsOi8vZGI6NTQzMi9ib29rX3N0b3Jl"
 ---
 apiVersion: apps/v1
 kind: Deployment
